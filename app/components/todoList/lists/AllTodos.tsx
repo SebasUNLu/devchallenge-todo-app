@@ -9,7 +9,6 @@ const AllTodos = () => {
 
   return (
     <div className="w-full">
-      <h1>All Todos</h1>
       {todos.map((todo) => (
         <Todo todoID={todo.id} key={`todo_${todo.id}`} />
       ))}

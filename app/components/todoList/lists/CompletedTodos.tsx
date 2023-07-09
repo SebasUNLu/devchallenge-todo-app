@@ -15,9 +15,8 @@ const CompletedTodos = () => {
 
   return (
     <div className="w-full">
-      <h1>Completed Todos</h1>
       {completedTodos.map((todo) => (
-        <Todo todoID={todo.id} key={`todo_${todo.id}`} />
+        <Todo todoID={todo.id} key={`todo_${todo.id}`} enableDelete />
       ))}
     </div>
   );

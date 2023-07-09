@@ -32,11 +32,17 @@ const TodoPage = () => {
     inputValue && addTodo(inputValue);
   };
 
+  const viewOptionsStyle = `cursor-pointer h-full w-2/12 text-center flex items-center justify-center `;
+
   return (
     <>
-      <div className="w-full flex">
+      <div className="w-full h-[50px] flex border-b border-[#BDBDBD] justify-around">
         <div
-          className="bg-red-800 w-full text-center"
+          className={`${viewOptionsStyle} ${
+            currentView === "all"
+              ? `border-b-4 border-[#2F80ED]`
+              : `hover:border-b-4 hover:border-[#BDBDBD]`
+          }`}
           onClick={() => {
             changeView("all");
           }}
@@ -44,7 +50,11 @@ const TodoPage = () => {
           All
         </div>
         <div
-          className="bg-blue-800 w-full text-center"
+          className={`${viewOptionsStyle} ${
+            currentView === "active"
+              ? `border-b-4 border-[#2F80ED]`
+              : `hover:border-b-4 hover:border-[#BDBDBD]`
+          }`}
           onClick={() => {
             changeView("active");
           }}
@@ -52,7 +62,11 @@ const TodoPage = () => {
           Active
         </div>
         <div
-          className="bg-green-800 w-full text-center"
+          className={`${viewOptionsStyle} ${
+            currentView === "completed"
+              ? `border-b-4 border-[#2F80ED]`
+              : `hover:border-b-4 hover:border-[#BDBDBD]`
+          }`}
           onClick={() => {
             changeView("completed");
           }}
@@ -60,7 +74,7 @@ const TodoPage = () => {
           Completed
         </div>
       </div>
-      <form className="w-full h-14 flex gap-6 my-8" onSubmit={handleSubmit}>
+      <form className="w-full h-14 flex gap-6 my-4" onSubmit={handleSubmit}>
         <input
           type="text"
           name="fname"

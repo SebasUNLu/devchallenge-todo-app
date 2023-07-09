@@ -7,12 +7,16 @@ const emptySavedData: SavedData = {
   lastID: 0,
   savedTodos: [],
 };
-const savedData = localStorage.getItem("savedTodos");
-// Saca los datos de lo que está guardado en el localstorage.
-// Si no hay datos guardados, inicializa ambos
-const { lastID, savedTodos }: SavedData = savedData
-  ? (JSON.parse(savedData) as SavedData)
-  : emptySavedData;
+
+// const savedData = localStorage.getItem("savedTodos");
+// // Saca los datos de lo que está guardado en el localstorage.
+// // Si no hay datos guardados, inicializa ambos
+// const { lastID, savedTodos }: SavedData = savedData
+//   ? (JSON.parse(savedData) as SavedData)
+//   : emptySavedData;
+
+const lastID = 0;
+const savedTodos: ToDo[] = [];
 
 /**
  * Función generadora de IDs

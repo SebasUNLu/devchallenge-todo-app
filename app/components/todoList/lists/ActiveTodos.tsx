@@ -15,7 +15,6 @@ const ActiveTodos = () => {
 
   return (
     <div className="w-full">
-      <h1>Active Todos</h1>
       {activeTodos.map((todo) => (
         <Todo todoID={todo.id} key={`todo_${todo.id}`} />
       ))}
