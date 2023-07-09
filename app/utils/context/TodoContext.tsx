@@ -34,6 +34,8 @@ interface TodoContextProps {
   removeTodo: (todoID: number) => void;
   removeCompletedTodos: () => void;
   markTodo: (todoId: number) => void;
+  getTodo: (todoID: number) => ToDo | null;
+  getActiveTodos: (complete: boolean) => ToDo[];
 }
 
 const TodoContext = createContext<TodoContextProps>({
@@ -42,6 +44,8 @@ const TodoContext = createContext<TodoContextProps>({
   markTodo: () => {},
   removeCompletedTodos: () => {},
   removeTodo: () => {},
+  getTodo: () => null,
+  getActiveTodos: () => [],
 });
 
 const TodoContextProvider = ({ children }: PropsWithChildren<{}>) => {
@@ -54,7 +58,6 @@ const TodoContextProvider = ({ children }: PropsWithChildren<{}>) => {
       completed: false,
     };
     setTodos((prev) => [...prev, newTodo]);
-    console.log("added ", newTodo);
   };
 
   const removeTodo = (todoID: number) => {
@@ -67,12 +70,11 @@ const TodoContextProvider = ({ children }: PropsWithChildren<{}>) => {
       if (todo.id === todoID) {
         return {
           ...todo,
-          completed: !todo.completed
+          completed: !todo.completed,
         };
       }
       return todo;
     });
-    console.log(newTodos)
     setTodos(newTodos);
   };
 
@@ -84,14 +86,29 @@ const TodoContextProvider = ({ children }: PropsWithChildren<{}>) => {
     setTodos(nonRemovedTodos);
   };
 
+  const getTodo = (todoID: number) => {
+    let searchedTodo = null;
+    todos.forEach((todo) => {
+      if (todo.id === todoID) searchedTodo = todo;
+    });
+    return searchedTodo;
+  };
+
+  const getActiveTodos = (complete: boolean) => {
+    const filteredTodos = todos.filter((todo) => todo.completed === complete);
+    return filteredTodos;
+  };
+
   return (
     <TodoContext.Provider
       value={{
-        todos: todos,
-        addTodo: addTodo,
-        removeCompletedTodos: removeCompletedTodos,
-        removeTodo: removeTodo,
-        markTodo: markTodo,
+        todos,
+        addTodo,
+        removeCompletedTodos,
+        removeTodo,
+        markTodo,
+        getActiveTodos,
+        getTodo,
       }}
     >
       {children}
