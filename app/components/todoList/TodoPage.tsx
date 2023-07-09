@@ -86,7 +86,7 @@ const TodoPage = () => {
         <input
           type="submit"
           value="Submit"
-          className="w-3/12 cursor-pointer bg-[#2F80ED] rounded-xl text-white"
+          className="w-3/12 cursor-pointer bg-[#2F80ED] hover:bg-[#2F80EDE5] rounded-xl text-white"
         />
       </form>
       <TodoList currentView={currentView} />
